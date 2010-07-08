@@ -3,10 +3,28 @@ define("MUTATIONS_NUMBER",4);
 define("MUTATION_RATE",0.5);
 
 class Tree{
+    /**
+     * @var SeedI a seed
+     * @access private
+     */
     private $seed;
-    private $canvas;
+    
+    /**
+     * @var image resource identifier
+     * @access private
+     */
+    private $canvas = false;
+    
+    /**
+     * @var array the location of the end of the current branch
+     * @access private
+     */
     private $end_pos = array('x'=>0,'y'=>0);
     
+    /**
+     * @param SeedI $seed a seed
+     * @param image reasourse identifer $canvas an image identifier
+     */
     public function __construct (SeedI $seed, $canvas=false){
         $this->seed = $seed;
         $this->canvas = $canvas;
@@ -93,7 +111,8 @@ class Tree{
             'y' => $s_pos['y'] + sin($ang)*$len
             ,'x' => $s_pos['x'] + cos($ang)*$len
         );
-
+        if (!$this->canvas) return;
+        
         $color = imagecolorallocate ($this->canvas, $color['r'], $color['g'], $color['b']);
         imageline ($this->canvas,$s_pos['x'],$s_pos['y'],$this->end_pos['x'],$this->end_pos['y'],$color);
     }
