@@ -64,7 +64,8 @@ class Tree{
         /*
          * 1st branch stating angle
          */
-        $angle = $this->seed->getAngle() + $this->seed->getAngleChange();
+        $angle = $this->seed->getAngle();
+        $change = $this->seed->getAngleChange();
         /*
          * this will be defiened in the paint method
          */
@@ -73,7 +74,9 @@ class Tree{
         /*
          * create branches
          */
-        for ($i=0,$l=$this->seed->getBranchNumber();$i<$l;$i++){
+        for ($i=1,$l=$this->seed->getBranchNumber();$i<=$l;$i++){
+            $angle = ($i % 2) ? $angle - $change * ($i) : $angle + $change * ($i);
+            
             /*
              * we pass the branch a new seed with a set of modified DNA.
              */
@@ -95,7 +98,6 @@ class Tree{
             );
             $branch->grow();
             
-            $angle += $this->seed->getAngleChange();
             if ($angle>359) $angle -= 359;
             if ($angle<0) $angle = $angle*-1;
         }
@@ -228,7 +230,10 @@ class Tree{
                     $diff = (int)(MUTATION_RATE * 10);
                     $num = rand(-1*($diff),$diff);
                     
-                    $branches = $this->seed->getBranchNumber()+$num;
+                    $branches = $this->seed->getBranchNumber();
+                    
+                    if ($num) $branches++;
+                    else $branches--;
                     if ($branches<0) $branches = 0;
                     
                     $new_dna[$prop] = $branches;

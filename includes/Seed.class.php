@@ -7,7 +7,7 @@ class Seed implements SeedI{
         , 'length' => 15
         , 'ratio'  => 0.8
         , 'height' => 3
-        , 'angle'  => 230
+        , 'angle'  => 270
         , 'angle-change' => 45
         , 'position' => array('x'=>150,'y'=>100)
         , 'branches' => 2

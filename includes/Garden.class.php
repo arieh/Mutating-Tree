@@ -29,7 +29,7 @@ class Garden{
                     <td>
                         <?php $seed =$this->tree->giveSeed(); ?>
                         <a href='garden.php?t=<?php echo $seed->serialize();?>'>
-                            <img src='tree.php?t=<?php echo $seed->serialize();?>' height='300' width='300' at='plant' /></a>
+                            <img src='tree.php?t=<?php echo $seed->serialize();?>' height='150' width='150' alt='plant' /></a>
                     </td>
                 <?php endfor;?>
                 </tr>
